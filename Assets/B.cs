@@ -8,6 +8,7 @@ public class B: MonoBehaviour // Đây chắc là object B, cái : này là kế
 
     private Rigidbody rb; // Cái này tôi chưa hiểu mấy, sao phải khai private, Rigidbody là như nào, rb hẳn là cái viết tắt để code cho dễ rồi
     private bool isGround = false; // Cái này là để kiểm tra xem có đang trên mặt đất hay không
+    private bool isJump = false; // Cái này là để kiểm tra xem có đang nhảy hay không
     void Start() // đây hẳn là hàm bắt đầu, void là kiểu trả về lúc nào nó được gọi, còn khi nào không gọi thì nó không lưu đúng không, giải thích lại cho tôi
     {
         rb = GetComponent<Rigidbody>(); // Sao phải khai như này, giải thích
@@ -30,9 +31,10 @@ public class B: MonoBehaviour // Đây chắc là object B, cái : này là kế
             );
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && rb != null && isGround){ // Cái này là để sử dụng phím space để nhảy // isGround là để xem có trên mặt đất không?(Buổi 2)
+        if (Input.GetKeyDown(KeyCode.Space) && rb != null && isGround && !isJump){ // Cái này là để sử dụng phím space để nhảy // isGround là để xem có trên mặt đất không?(Buổi 2)
             rb.AddForce(UnityEngine.Vector3.up * lucNhay, ForceMode.Impulse);
             Debug.Log("Nhảy!");
+            isJump = true; 
         }
     }
     void OnCollisionEnter(Collision collision) // OnCollisionEnter được dùng khi bóng va chạm bất cứ thứ gì
@@ -40,6 +42,7 @@ public class B: MonoBehaviour // Đây chắc là object B, cái : này là kế
         if (collision.gameObject.CompareTag("Ground"))//CompareTag là để kiểm tra xem  nó va chạm với tag nào, ở đây là "Untagged" tức là không có tag nào, thường thì đất sẽ không có tag nên nó sẽ là "Untagged", nếu va chạm với đất thì isGround sẽ là true
         {
             isGround = true; // khi va chạm đất thì cái isGround là true
+            isJump = false; // khi va chạm đất thì cái isJump là false, tức là nó không đang nhảy nữa
         }
    }
    void OnCollisionExit(Collision collision)
@@ -48,5 +51,9 @@ public class B: MonoBehaviour // Đây chắc là object B, cái : này là kế
         {
             isGround = false; // khi rời khỏi đất thì isground là false
         }
-    }  
+    } 
+    void OnCollisionStay(Collision collision)
+    {
+        isGround = true;
+    } 
 }
