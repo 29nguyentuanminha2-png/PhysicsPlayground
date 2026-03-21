@@ -126,3 +126,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Coin
   scoreValue: 10
+  audioClip: {fileID: 8300000, guid: 667569215deed41e1a11058122eed28f, type: 3}

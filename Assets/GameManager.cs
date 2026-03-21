@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class GameManager : MonoBehaviour
     [Header("Game Settings")]
     [SerializeField] private float timelimit = 30f; // này là để limit thời gian chơi, ban đầu là 30 giây
     [SerializeField] private int Victorypoint = 50; // Cái này là để thiết lập điểm số chiến thắng, ban đầu là 50 điểm
+    [SerializeField] private Button restartButton; // Cái này là để hiển thị nút khởi động lại trò chơi
 
     private int score = 0; // Cái này là để lưu điểm số, ban đầu là 0
     private float timer; // đếm thời gian còn lại
@@ -56,4 +59,8 @@ public class GameManager : MonoBehaviour
             victoryText.color = UnityEngine.Color.green; // Cái này là để thay đổi màu sắc của victoryText thành màu xanh lá cây khi người chơi chiến thắng
         }
     }    
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Cái này là để tải lại cảnh hiện tại, nó sẽ khởi động lại trò chơi khi được gọi
+    }
 }
