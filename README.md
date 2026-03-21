@@ -18,7 +18,7 @@ A 3D physics-based game built with Unity as part of my
 - Git workflow for game development
 
 ## Built With
-- Unity 2022.3 LTS
+- Unity 6.3 LTS
 - C#
 - Built-in Render Pipeline
 
